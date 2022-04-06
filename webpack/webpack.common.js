@@ -2,8 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: "development",
-  //   entry: path.resolve(__dirname, "../src/index.tsx"),
+  entry: path.resolve(__dirname, "..", "./src/index.tsx"),
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
@@ -22,24 +21,24 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
-      //   {
-      //     test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-      //     type: "asset/resource",
-      //   },
-      //   {
-      //     test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-      //     type: "asset/inline",
-      //   },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: "asset/inline",
+      },
     ],
   },
-  //   output: {
-  //     path: path.resolve(__dirname, "../dist"),
-  //     filename: "main.js",
-  //   },
+  output: {
+    path: path.resolve(__dirname, "..", "./dist"),
+    filename: "main.js",
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "./src/index.html"),
+      template: path.resolve(__dirname, "..", "./src/index.html"),
     }),
   ],
-  //   stats: "errors-only",
+  stats: "errors-only",
 };
