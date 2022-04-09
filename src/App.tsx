@@ -1,27 +1,11 @@
-import {
-  AppBar,
-  Button,
-  Card,
-  Paper,
-  Stack,
-  Switch,
-  Typography,
-} from "@mui/material";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { uiAction } from "./store/uiState/ui-slice";
-import { ThemeProvider } from "@mui/material";
+import { useAppSelector } from "./store/hooks";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme/themes";
 import { CustomThemes } from "./store/uiState/ui-data-models";
+import Layout from "./layout/layout";
 
 const App = () => {
-  const drawerOpen = useAppSelector((state) => state.ui.drawerIsVisible);
-  const settingOpen = useAppSelector((state) => state.ui.settingIsVisible);
   const customTheme = useAppSelector((state) => state.ui.customTheme);
-  const dispatch = useAppDispatch();
-
-  const handleThemeSelection = (selectedTheme: CustomThemes) => {
-    dispatch(uiAction.colorsSelection(selectedTheme));
-  };
 
   const getTheme = () => {
     switch (customTheme) {
@@ -38,31 +22,8 @@ const App = () => {
 
   return (
     <ThemeProvider theme={getTheme()}>
-      <Paper
-        sx={{
-          width: "500px",
-          padding: "20px",
-        }}
-      >
-        <br></br>
-        <Typography variant="h6">Select your Theme</Typography>
-        <div style={{ display: "flex", gap: "10px" }}>
-          <Button
-            variant="outlined"
-            onClick={() => handleThemeSelection(CustomThemes.light)}
-          >
-            Light
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => handleThemeSelection(CustomThemes.dark)}
-          >
-            Dark
-          </Button>
-        </div>
-
-        <br></br>
-      </Paper>
+      <CssBaseline />
+      <Layout></Layout>
     </ThemeProvider>
   );
 };
